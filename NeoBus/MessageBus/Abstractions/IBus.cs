@@ -7,6 +7,8 @@ namespace NeoBus.MessageBus.Abstractions
     {
         Task<CommandResult> SendCommandAsync<T>(T command) where T : Command<CommandResult>;
 
+        Task<CommandResult> SendQueryAsync<T>(T command) where T : Command<CommandResult>;
+
         Task RaiseEvent<T>(T @event, RaiseEventOn raiseEventOn = RaiseEventOn.Local) where T : Event;
     }
 }

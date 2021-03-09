@@ -29,5 +29,18 @@ namespace SampleForUseNeoBus.Controllers
             var result = catalog.AddProduct(command);
             return result;
         }
+
+        [HttpGet("add")]
+        public Task<CommandResult> GetAsync(int id)
+        {
+            var command = new ProductAddCommand
+            {
+                Name = request.Name,
+                Price = request.Price
+            };
+
+            var result = catalog.AddProduct(command);
+            return result;
+        }
     }
 }
