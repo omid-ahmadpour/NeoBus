@@ -4,15 +4,14 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using NeoBus.Kafka;
-using NeoBus.Kafka.EntityReplication;
-using NeoBus.MessageBus;
-using NeoBus.MessageBus.Abstractions;
+using NeoBus;
 using NeoBus.MessageBus.Models;
 using SampleForUseNeoBus.ApplicationService;
 using SampleForUseNeoBus.ApplicationService.CommandHandlers;
 using SampleForUseNeoBus.ApplicationService.Commands;
 using SampleForUseNeoBus.ApplicationService.EventHandlers;
+using SampleForUseNeoBus.ApplicationService.Queries;
+using SampleForUseNeoBus.ApplicationService.QueryHandlers;
 using SampleForUseNeoBus.Domain.Catalog;
 
 namespace SampleForUseNeoBus
@@ -27,17 +26,12 @@ namespace SampleForUseNeoBus
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "NeoBus Sample Use", Version = "v1" });
             });
 
-            services.AddMediatR(typeof(Startup));
-
             services.AddScoped<CatalogUseCase>();
 
-            services.AddSingleton(typeof(KafkaProducer<>));
-
-            services.AddSingleton(typeof(KafkaEntityPublisher<,>));
-
-            services.AddScoped<IBus, Bus>();
+            services.AddNeoBus();
 
             services.AddScoped<IRequestHandler<ProductAddCommand, CommandResult>, ProductAddCommandHandler>();
+            services.AddScoped<IRequestHandler<GetProductQuery, CommandResult>, GetProductQueryHandler>();
             services.AddScoped<INotificationHandler<ProductAddedEvent>, ProductAddedEventHandler>();
         }
         
@@ -47,7 +41,7 @@ namespace SampleForUseNeoBus
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/index.html", "Sample For Use NeoBus"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sample For Use NeoBus"));
             }
 
             app.UseHttpsRedirection();

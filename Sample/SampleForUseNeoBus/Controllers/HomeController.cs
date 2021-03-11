@@ -31,7 +31,7 @@ namespace SampleForUseNeoBus.Controllers
             return result;
         }
 
-        [HttpGet("add")]
+        [HttpGet]
         public Task<CommandResult> GetAsync(int id)
         {
             var query = new GetProductQuery
