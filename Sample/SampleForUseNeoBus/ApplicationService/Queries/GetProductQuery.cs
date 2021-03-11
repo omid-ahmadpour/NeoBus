@@ -2,8 +2,8 @@
 
 namespace SampleForUseNeoBus.ApplicationService.Queries
 {
-    public class GetProductQuery : Query<string>
+    public class GetProductQuery : Query<CommandResult>
     {
-        public int Id { get; set; }
+        public int ProductId { get; set; }
     }
 }

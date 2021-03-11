@@ -1,4 +1,5 @@
 ﻿using NeoBus.MessageBus.Abstractions;
+using NeoBus.MessageBus.Models;
 using SampleForUseNeoBus.ApplicationService.Queries;
 using System.Threading;
 using System.Threading.Tasks;
@@ -7,9 +8,15 @@ namespace SampleForUseNeoBus.ApplicationService.QueryHandlers
 {
     public class GetProductQueryHandler : ICanHandleQuery<GetProductQuery>
     {
-        public Task<GetProductQuery> Handle(GetProductQuery request, CancellationToken cancellationToken)
+        public async Task<CommandResult> Handle(GetProductQuery request, CancellationToken cancellationToken)
         {
-            throw new System.NotImplementedException();
+            var result = "returned from query";
+            var response = new CommandResult
+            {
+                Data = result
+            };
+
+            return response;
         }
     }
 }

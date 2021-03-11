@@ -2,6 +2,7 @@
 using NeoBus.MessageBus.Models;
 using SampleForUseNeoBus.ApplicationService;
 using SampleForUseNeoBus.ApplicationService.Commands;
+using SampleForUseNeoBus.ApplicationService.Queries;
 using System.Threading.Tasks;
 
 namespace SampleForUseNeoBus.Controllers
@@ -26,20 +27,19 @@ namespace SampleForUseNeoBus.Controllers
                 Price = request.Price
             };
 
-            var result = catalog.AddProduct(command);
+            var result = catalog.AddProductAsync(command);
             return result;
         }
 
         [HttpGet("add")]
         public Task<CommandResult> GetAsync(int id)
         {
-            var command = new ProductAddCommand
+            var query = new GetProductQuery
             {
-                Name = request.Name,
-                Price = request.Price
+                ProductId = id
             };
 
-            var result = catalog.AddProduct(command);
+            var result = catalog.GetProductByIdAsync(query);
             return result;
         }
     }
