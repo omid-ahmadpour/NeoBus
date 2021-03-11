@@ -24,7 +24,7 @@ namespace SampleForUseNeoBus
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApplication2", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "NeoBus Sample Use", Version = "v1" });
             });
 
             services.AddMediatR(typeof(Startup));
@@ -47,7 +47,7 @@ namespace SampleForUseNeoBus
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApplication2 v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/index.html", "Sample For Use NeoBus"));
             }
 
             app.UseHttpsRedirection();
