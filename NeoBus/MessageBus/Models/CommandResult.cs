@@ -8,7 +8,7 @@ namespace NeoBus.MessageBus.Models
 
         public List<CommandError> CommandErrors { get; set; } = new List<CommandError>();
 
-        public bool Succeeded { get; set; } = false;
+        public bool Succeeded { get; set; } = true;
 
         public object Data { get; set; }
 
