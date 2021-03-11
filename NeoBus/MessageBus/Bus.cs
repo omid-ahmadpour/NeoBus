@@ -38,5 +38,10 @@ namespace NeoBus.MessageBus
                 await eventProducer.ProduceEvent(@event);
             }
         }
+
+        public async Task<CommandResult> SendQueryAsync<T>(T query) where T : Query<CommandResult>
+        {
+            return await mediator.Send(query);
+        }
     }
 }
