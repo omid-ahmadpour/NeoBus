@@ -21,3 +21,5 @@ A Bus for sending command, query and event using CQRS in .Net.
 > services.AddScoped<IRequestHandler<GetProductQuery, CommandResult>, GetProductQueryHandler>();
 > services.AddScoped<INotificationHandler<ProductAddedEvent>, ProductAddedEventHandler>();
 ```
+
+### The source of a project that used NeoBus is also included.
