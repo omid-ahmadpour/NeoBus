@@ -4,7 +4,7 @@ A Bus for sending command, query and event using CQRS in .Net.
 ## Installing NeoBus
 
 ```ruby
-> Install-Package NeoBus -Version 1.0.1
+> Install-Package NeoBus
 ```
 
 ## Registering NeoBus
