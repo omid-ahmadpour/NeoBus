@@ -18,9 +18,9 @@ A Bus for sending command, query and event using CQRS in .Net.
 
 ```ruby
 > services.AddScoped<IRequestHandler<ProductAddCommand, CommandResult>, ProductAddCommandHandler>();
-> 
+
 > services.AddScoped<IRequestHandler<GetProductQuery, CommandResult>, GetProductQueryHandler>();
-> 
+
 > services.AddScoped<INotificationHandler<ProductAddedEvent>, ProductAddedEventHandler>();
 ```
 
