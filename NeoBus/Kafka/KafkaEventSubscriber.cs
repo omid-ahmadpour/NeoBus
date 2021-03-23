@@ -12,8 +12,6 @@ namespace NeoBus.Kafka
     public class KafkaEventSubscriberService<TEvent, TEventHandler> : IHostedService where TEvent : Event
                                                                                      where TEventHandler : ICanHandleEvent<TEvent>
     {
-        public IBus Bus { get; }
-
         public IServiceProvider ServiceProvider { get; }
 
         public TEventHandler EventHandler { get; }
@@ -22,9 +20,8 @@ namespace NeoBus.Kafka
 
         private KafkaConsumer<TEvent> EventConsumer { get; }
 
-        public KafkaEventSubscriberService(IBus bus, IServiceProvider serviceProvider, IConfiguration configuration, TEventHandler eventHandler, ILogger<KafkaEventSubscriberService<TEvent, TEventHandler>> logger)
+        public KafkaEventSubscriberService(IServiceProvider serviceProvider, IConfiguration configuration, TEventHandler eventHandler, ILogger<KafkaEventSubscriberService<TEvent, TEventHandler>> logger)
         {
-            Bus = bus;
             ServiceProvider = serviceProvider;
             EventHandler = eventHandler;
             Logger = logger;
@@ -37,6 +34,11 @@ namespace NeoBus.Kafka
             {
                 Logger.LogInformation(5656, $"{kafkaEvent}");
                 var scopedSemaphoreSlim = (SemaphoreSlim)ServiceProvider.GetService(typeof(SemaphoreSlim));
+
+                if (scopedSemaphoreSlim is null)
+                {
+                    return;
+                }
 
                 try
                 {
