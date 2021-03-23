@@ -16,11 +16,15 @@ A Bus for sending command, query and event using CQRS in .Net.
 
 ### Register Command Or Query Or Event
 
+#### Command And Query :
 ```ruby
 > services.AddScoped<IRequestHandler<ProductAddCommand, CommandResult>, ProductAddCommandHandler>();
 
 > services.AddScoped<IRequestHandler<GetProductQuery, CommandResult>, GetProductQueryHandler>();
+```
 
+#### Event :
+```ruby
 > services.AddScoped<INotificationHandler<ProductAddedEvent>, ProductAddedEventHandler>();
 ```
 
