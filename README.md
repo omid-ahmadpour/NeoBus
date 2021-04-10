@@ -1,6 +1,9 @@
 # NeoBus
 A Bus for sending command, query and event using CQRS in .Net.
 
+## Give a Star! ⭐
+If you like or are using this project to learn or using NeoBus package, please give it a star. Thanks!
+
 ## Installing NeoBus
 
 ```ruby
