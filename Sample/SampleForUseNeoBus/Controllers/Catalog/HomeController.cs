@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NeoBus.MessageBus.Abstractions;
 using NeoBus.MessageBus.Models;
-using SampleForUseNeoBus.ApplicationService;
 using SampleForUseNeoBus.ApplicationService.Catalog.AddProduct;
 using SampleForUseNeoBus.ApplicationService.Catalog.GetProductDetail;
 using SampleForUseNeoBus.Controllers.Catalog.Requests;
@@ -12,11 +12,11 @@ namespace SampleForUseNeoBus.Controllers.Catalog
     [ApiController]
     public class HomeController : ControllerBase
     {
-        private readonly CatalogUseCase catalog;
+        private readonly IBus _bus;
 
-        public HomeController(CatalogUseCase catalog)
+        public HomeController(IBus bus)
         {
-            this.catalog = catalog;
+            _bus = bus;
         }
 
         [HttpPost("add")]
@@ -28,7 +28,7 @@ namespace SampleForUseNeoBus.Controllers.Catalog
                 Price = request.Price
             };
 
-            var result = catalog.AddProductAsync(command);
+            var result = _bus.SendCommandAsync(command);
             return result;
         }
 
@@ -40,7 +40,7 @@ namespace SampleForUseNeoBus.Controllers.Catalog
                 ProductId = id
             };
 
-            var result = catalog.GetProductByIdAsync(query);
+            var result = _bus.SendQueryAsync(query);
             return result;
         }
     }
