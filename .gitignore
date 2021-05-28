@@ -339,3 +339,4 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 /NeoBus/nuget.config
+/zk-single-kafka-single
