@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NeoBus", "NeoBus\NeoBus.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleForUseNeoBus", "Sample\SampleForUseNeoBus\SampleForUseNeoBus.csproj", "{F55CB234-5B42-47AE-9F32-FCB01D3A49D8}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{8F8E5E16-B9A7-4DC9-8841-CD6D56EE19B2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F55CB234-5B42-47AE-9F32-FCB01D3A49D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F55CB234-5B42-47AE-9F32-FCB01D3A49D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F55CB234-5B42-47AE-9F32-FCB01D3A49D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F8E5E16-B9A7-4DC9-8841-CD6D56EE19B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F8E5E16-B9A7-4DC9-8841-CD6D56EE19B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F8E5E16-B9A7-4DC9-8841-CD6D56EE19B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F8E5E16-B9A7-4DC9-8841-CD6D56EE19B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
