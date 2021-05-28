@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NeoBus.MessageBus.Models;
 using SampleForUseNeoBus.ApplicationService;
-using SampleForUseNeoBus.ApplicationService.Commands;
-using SampleForUseNeoBus.ApplicationService.Queries;
+using SampleForUseNeoBus.ApplicationService.Catalog.AddProduct;
+using SampleForUseNeoBus.ApplicationService.Catalog.GetProductDetail;
 using System.Threading.Tasks;
 
 namespace SampleForUseNeoBus.Controllers
@@ -21,7 +21,7 @@ namespace SampleForUseNeoBus.Controllers
         [HttpPost("add")]
         public Task<CommandResult> AddAsync(ProductAddRequest request)
         {
-            var command = new ProductAddCommand
+            var command = new AddProductCommand
             {
                 Name = request.Name,
                 Price = request.Price
@@ -34,7 +34,7 @@ namespace SampleForUseNeoBus.Controllers
         [HttpGet]
         public Task<CommandResult> GetAsync(int id)
         {
-            var query = new GetProductQuery
+            var query = new GetProductDetailQuery
             {
                 ProductId = id
             };

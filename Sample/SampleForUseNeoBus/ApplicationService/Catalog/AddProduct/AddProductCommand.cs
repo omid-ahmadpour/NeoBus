@@ -1,8 +1,8 @@
 ﻿using NeoBus.MessageBus.Models;
 
-namespace SampleForUseNeoBus.ApplicationService.Commands
+namespace SampleForUseNeoBus.ApplicationService.Catalog.AddProduct
 {
-    public class ProductAddCommand : Command<CommandResult>
+    public class AddProductCommand : Command<CommandResult>
     {
         public string Name { get; set; }
 

@@ -7,11 +7,10 @@ using Microsoft.OpenApi.Models;
 using NeoBus;
 using NeoBus.MessageBus.Models;
 using SampleForUseNeoBus.ApplicationService;
+using SampleForUseNeoBus.ApplicationService.Catalog.AddProduct;
+using SampleForUseNeoBus.ApplicationService.Catalog.GetProductDetail;
 using SampleForUseNeoBus.ApplicationService.CommandHandlers;
-using SampleForUseNeoBus.ApplicationService.Commands;
 using SampleForUseNeoBus.ApplicationService.EventHandlers;
-using SampleForUseNeoBus.ApplicationService.Queries;
-using SampleForUseNeoBus.ApplicationService.QueryHandlers;
 using SampleForUseNeoBus.Domain.Catalog;
 
 namespace SampleForUseNeoBus
@@ -30,8 +29,8 @@ namespace SampleForUseNeoBus
 
             services.AddNeoBus();
 
-            services.AddScoped<IRequestHandler<ProductAddCommand, CommandResult>, ProductAddCommandHandler>();
-            services.AddScoped<IRequestHandler<GetProductQuery, CommandResult>, GetProductQueryHandler>();
+            services.AddScoped<IRequestHandler<AddProductCommand, CommandResult>, AddProductCommandHandler>();
+            services.AddScoped<IRequestHandler<GetProductDetailQuery, CommandResult>, GetProductDetailQueryHandler>();
             services.AddScoped<INotificationHandler<ProductAddedEvent>, ProductAddedEventHandler>();
         }
         

@@ -1,22 +1,22 @@
 ﻿using NeoBus.MessageBus.Abstractions;
 using NeoBus.MessageBus.Models;
-using SampleForUseNeoBus.ApplicationService.Commands;
+using SampleForUseNeoBus.ApplicationService.Catalog.AddProduct;
 using SampleForUseNeoBus.Domain.Catalog;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace SampleForUseNeoBus.ApplicationService.CommandHandlers
 {
-    public class ProductAddCommandHandler : ICanHandleCommand<ProductAddCommand>
+    public class AddProductCommandHandler : ICanHandleCommand<AddProductCommand>
     {
-        public ProductAddCommandHandler(IBus bus)
+        public AddProductCommandHandler(IBus bus)
         {
-            Bus = bus;
+            Bus = bus ?? throw new System.ArgumentNullException(nameof(bus));
         }
 
         public IBus Bus { get; }
 
-        public async Task<CommandResult> Handle(ProductAddCommand request, CancellationToken cancellationToken)
+        public async Task<CommandResult> Handle(AddProductCommand request, CancellationToken cancellationToken)
         {
             var commandResult = new CommandResult();
 
