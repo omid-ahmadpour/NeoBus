@@ -25,8 +25,6 @@ namespace SampleForUseNeoBus
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "NeoBus Sample Use", Version = "v1" });
             });
 
-            services.AddScoped<CatalogUseCase>();
-
             services.AddNeoBus();
 
             services.AddScoped<IRequestHandler<AddProductCommand, CommandResult>, AddProductCommandHandler>();
