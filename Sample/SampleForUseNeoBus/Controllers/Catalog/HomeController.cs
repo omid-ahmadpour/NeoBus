@@ -3,9 +3,10 @@ using NeoBus.MessageBus.Models;
 using SampleForUseNeoBus.ApplicationService;
 using SampleForUseNeoBus.ApplicationService.Catalog.AddProduct;
 using SampleForUseNeoBus.ApplicationService.Catalog.GetProductDetail;
+using SampleForUseNeoBus.Controllers.Catalog.Requests;
 using System.Threading.Tasks;
 
-namespace SampleForUseNeoBus.Controllers
+namespace SampleForUseNeoBus.Controllers.Catalog
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -19,7 +20,7 @@ namespace SampleForUseNeoBus.Controllers
         }
 
         [HttpPost("add")]
-        public Task<CommandResult> AddAsync(ProductAddRequest request)
+        public Task<CommandResult> AddAsync(AddProductRequest request)
         {
             var command = new AddProductCommand
             {

@@ -1,6 +1,6 @@
-﻿namespace SampleForUseNeoBus.Controllers
+﻿namespace SampleForUseNeoBus.Controllers.Catalog.Requests
 {
-    public class ProductAddRequest
+    public class AddProductRequest
     {
         public string Name { get; set; }
 
