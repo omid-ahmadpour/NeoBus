@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  Sample:
+    image: samplersvc
+    build:
+      context: .
+      dockerfile: Sample.Web/Dockerfile
+    ports:
+    - 32001:80
