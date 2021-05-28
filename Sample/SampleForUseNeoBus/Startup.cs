@@ -27,8 +27,13 @@ namespace SampleForUseNeoBus
 
             services.AddNeoBus();
 
+            //Register Commands
             services.AddScoped<IRequestHandler<AddProductCommand, CommandResult>, AddProductCommandHandler>();
+
+            //Register Queries
             services.AddScoped<IRequestHandler<GetProductDetailQuery, CommandResult>, GetProductDetailQueryHandler>();
+
+            //Register Events
             services.AddScoped<INotificationHandler<ProductAddedEvent>, ProductAddedEventHandler>();
         }
         
