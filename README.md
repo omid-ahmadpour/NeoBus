@@ -26,9 +26,16 @@ If you like or are using this project to learn or using NeoBus package, please g
 > services.AddScoped<IRequestHandler<GetProductQuery, CommandResult>, GetProductQueryHandler>();
 ```
 
-#### Event :
+#### InMemory Events :
 ```ruby
 > services.AddScoped<INotificationHandler<ProductAddedEvent>, ProductAddedEventHandler>();
+```
+
+#### Distributed Events(Event On Kafka) :
+```ruby
+> services.AddHostedService<KafkaEventSubscriberService<ProductAddedEventOnKafka, ProductAddedEventOnKafkaHandler>>();
+
+ services.AddSingleton<ProductAddedEventOnKafkaHandler>();
 ```
 
 ### The source of a project that used NeoBus is also included.
