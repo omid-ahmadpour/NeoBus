@@ -25,6 +25,11 @@ namespace NeoBus.MessageBus
             return await mediator.Send(command);
         }
 
+        public async Task<CommandResult> SendQueryAsync<T>(T query) where T : Query<CommandResult>
+        {
+            return await mediator.Send(query);
+        }
+
         public async Task RaiseEvent<T>(T @event, RaiseEventOn raiseEventOn = RaiseEventOn.Local) where T : Event
         {
             if ((raiseEventOn & RaiseEventOn.Local) != 0)
@@ -37,11 +42,6 @@ namespace NeoBus.MessageBus
                 var eventProducer = (KafkaProducer<T>)ServiceProvider.GetService(typeof(KafkaProducer<T>));
                 await eventProducer.ProduceEvent(@event);
             }
-        }
-
-        public async Task<CommandResult> SendQueryAsync<T>(T query) where T : Query<CommandResult>
-        {
-            return await mediator.Send(query);
         }
     }
 }
