@@ -4,6 +4,7 @@ using NeoBus.Kafka;
 using NeoBus.MessageBus;
 using NeoBus.MessageBus.Abstractions;
 using System.Reflection;
+using System.Threading;
 
 namespace NeoBus
 {
@@ -12,6 +13,8 @@ namespace NeoBus
         public static IServiceCollection AddNeoBus(this IServiceCollection services)
         {
             services.AddMediatR(Assembly.GetExecutingAssembly());
+
+            services.AddSingleton(x => new SemaphoreSlim(1));
 
             services.AddSingleton(typeof(KafkaProducer<>));
 
