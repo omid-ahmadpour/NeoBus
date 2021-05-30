@@ -28,6 +28,8 @@ namespace SampleForUseNeoBus.ApplicationService.CommandHandlers
 
             await Bus.RaiseEvent(new ProductAddedEvent(product));
 
+            await Bus.RaiseEvent(new ProductAddedEventOnKafka(product),raiseEventOn: RaiseEventOn.Kafka);
+
             return commandResult;
         }
     }
