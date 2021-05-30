@@ -5,8 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using NeoBus;
+using NeoBus.Kafka;
 using NeoBus.MessageBus.Models;
-using SampleForUseNeoBus.ApplicationService;
 using SampleForUseNeoBus.ApplicationService.Catalog.AddProduct;
 using SampleForUseNeoBus.ApplicationService.Catalog.GetProductDetail;
 using SampleForUseNeoBus.ApplicationService.CommandHandlers;
@@ -33,10 +33,15 @@ namespace SampleForUseNeoBus
             //Register Queries
             services.AddScoped<IRequestHandler<GetProductDetailQuery, CommandResult>, GetProductDetailQueryHandler>();
 
-            //Register Events
+            //Register InMemory Events
             services.AddScoped<INotificationHandler<ProductAddedEvent>, ProductAddedEventHandler>();
+
+            //Register Distributed Events(Event On Kafka)
+            services.AddHostedService<KafkaEventSubscriberService<ProductAddedEventOnKafka, ProductAddedEventOnKafkaHandler>>();
+
+            services.AddSingleton<ProductAddedEventOnKafkaHandler>();
         }
-        
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -49,8 +54,6 @@ namespace SampleForUseNeoBus
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
-            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
