@@ -26,8 +26,10 @@ namespace SampleForUseNeoBus.ApplicationService.CommandHandlers
                 Price = request.Price
             };
 
+            //InMemory Event
             await Bus.RaiseEvent(new ProductAddedEvent(product));
 
+            //Distributed Event (Event On Kafka)
             await Bus.RaiseEvent(new ProductAddedEventOnKafka(product),raiseEventOn: RaiseEventOn.Kafka);
 
             return commandResult;
