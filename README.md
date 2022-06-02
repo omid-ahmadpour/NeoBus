@@ -62,3 +62,7 @@ If you like or are using this project to learn or using NeoBus package, please g
   5. Run docker-compose -f docker-compose-kafka.yml up
   6. Now Kafka is ready on Docker
    ```
+   
+   ## Read More
+1. https://medium.com/@omid-ahmadpour/eventbus-application-and-introduction-of-neobus-package-c22029d07f4
+2. https://virgool.io/@ahmadpooromid/%DA%A9%D8%A7%D8%B1%D8%A8%D8%B1%D8%AF-eventbus-%D9%88-%D9%85%D8%B9%D8%B1%D9%81%DB%8C-%D9%BE%DA%A9%DB%8C%D8%AC-neobus-rveoqqgefbmu
