@@ -10,11 +10,11 @@ namespace SampleForUseNeoBus.Controllers.Catalog
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class HomeController : ControllerBase
+    public class ProductController : ControllerBase
     {
         private readonly IBus _bus;
 
-        public HomeController(IBus bus)
+        public ProductController(IBus bus)
         {
             _bus = bus;
         }
