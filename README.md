@@ -51,7 +51,7 @@ If you like or are using this project to learn or using NeoBus package, please g
 
 > [Sample For Use NeoBus](https://github.com/omid-ahmadpour/NeoBus/tree/main/Sample/SampleForUseNeoBus)
 
-# Kafka Docker Compose
+## Kafka Docker Compose
   ## for running Kafka, follow the following instruction
   
   ```ruby
