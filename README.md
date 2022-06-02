@@ -16,6 +16,15 @@ If you like or are using this project to learn or using NeoBus package, please g
 ```ruby
 > services.AddNeoBus();
 ```
+## AppSettings Config
+## Put the following configuration in appsettings.json and add your kafka address
+```
+"NeoBus": {
+    "Kafka": {
+      "Servers": [ "localhost:9092" ]
+    }
+  }}
+  ```
 
 ### Register Command Or Query Or Event
 
