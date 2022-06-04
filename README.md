@@ -10,12 +10,6 @@ If you like or are using this project to learn or using NeoBus package, please g
 > Install-Package NeoBus
 ```
 
-## Registering NeoBus
-### in Startup -> ConfigureServices
-
-```ruby
-> services.AddNeoBus();
-```
 ## AppSettings Config
 ## Put the following configuration in appsettings.json and add your kafka address
 ```
@@ -25,6 +19,20 @@ If you like or are using this project to learn or using NeoBus package, please g
     }
   }}
   ```
+  
+## Registering NeoBus
+### in Startup -> ConfigureServices
+
+#### for version 1.2.0 and above use following code to register NeoBus
+#### commands and queries will be register automatically
+```ruby
+>  services.AddNeoBus(Assembly.GetExecutingAssembly());
+```
+
+#### for versions lower than 1.2.0 use following code to register and need to register commands and queries manually
+```ruby
+> services.AddNeoBus();
+```
 
 ### Register Command Or Query Or Event
 
