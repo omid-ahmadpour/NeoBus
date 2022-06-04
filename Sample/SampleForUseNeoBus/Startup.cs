@@ -1,4 +1,3 @@
-using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -6,12 +5,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using NeoBus;
 using NeoBus.Kafka;
-using NeoBus.MessageBus.Models;
-using SampleForUseNeoBus.ApplicationService.Catalog.AddProduct;
-using SampleForUseNeoBus.ApplicationService.Catalog.GetProductDetail;
-using SampleForUseNeoBus.ApplicationService.CommandHandlers;
 using SampleForUseNeoBus.ApplicationService.EventHandlers;
 using SampleForUseNeoBus.Domain.Catalog;
+using System.Reflection;
 
 namespace SampleForUseNeoBus
 {
@@ -25,16 +21,7 @@ namespace SampleForUseNeoBus
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "NeoBus Sample Use", Version = "v1" });
             });
 
-            services.AddNeoBus();
-
-            //Register Commands
-            services.AddScoped<IRequestHandler<AddProductCommand, CommandResult>, AddProductCommandHandler>();
-
-            //Register Queries
-            services.AddScoped<IRequestHandler<GetProductDetailQuery, CommandResult>, GetProductDetailQueryHandler>();
-
-            //Register InMemory Events
-            services.AddScoped<INotificationHandler<ProductAddedEvent>, ProductAddedEventHandler>();
+            services.AddNeoBus(Assembly.GetExecutingAssembly());
 
             //Register Distributed Events(Event On Kafka)
             services.AddHostedService<KafkaEventSubscriberService<ProductAddedEventOnKafka, ProductAddedEventOnKafkaHandler>>();
