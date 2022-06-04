@@ -20,21 +20,30 @@ If you like or are using this project to learn or using NeoBus package, please g
   }}
   ```
   
-## Registering NeoBus
+## Register NeoBus
 ### in Startup -> ConfigureServices
 
-#### for version 1.2.0 and above use following code to register NeoBus
-#### commands and queries will be register automatically
 ```ruby
 >  services.AddNeoBus(Assembly.GetExecutingAssembly());
 ```
 
-#### for versions lower than 1.2.0 use following code to register and need to register commands and queries manually
+### Register Distributed Events
+
+#### Distributed Events(Event On Kafka) :
+```ruby
+> services.AddHostedService<KafkaEventSubscriberService<ProductAddedEventOnKafka, ProductAddedEventOnKafkaHandler>>();
+
+ services.AddSingleton<ProductAddedEventOnKafkaHandler>();
+```
+
+
+### for versions lower than 1.2.0 use following code to register and need to register commands and queries manually
+
 ```ruby
 > services.AddNeoBus();
 ```
 
-### Register Command Or Query Or Event
+### Register Command and Query and Event
 
 #### Command And Query :
 ```ruby
@@ -46,14 +55,6 @@ If you like or are using this project to learn or using NeoBus package, please g
 #### InMemory Events :
 ```ruby
 > services.AddScoped<INotificationHandler<ProductAddedEvent>, ProductAddedEventHandler>();
-```
-
-#### Distributed Events(Event On Kafka) :
-```ruby
-> services.AddHostedService<KafkaEventSubscriberService<ProductAddedEventOnKafka, ProductAddedEventOnKafkaHandler>>();
-
- services.AddSingleton<ProductAddedEventOnKafkaHandler>();
-```
 
 ### The source of a project that used NeoBus is also included.
 
