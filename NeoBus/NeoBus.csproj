@@ -3,13 +3,13 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>1.1.1</Version>
+    <Version>1.2.0</Version>
     <Authors>Omid Ahmadpour</Authors>
     <Description>A Bus for sending command, query and event using CQRS in .NET</Description>
     <PackageProjectUrl>https://github.com/omid-ahmadpour/NeoBus</PackageProjectUrl>
     <PackageIcon>NeoBus.png</PackageIcon>
     <RepositoryUrl>https://github.com/omid-ahmadpour/NeoBus</RepositoryUrl>
-    <PackageReleaseNotes>update NeoBus to .NET6.</PackageReleaseNotes>
+    <PackageReleaseNotes>registering cammands and queries automatically.</PackageReleaseNotes>
     <PackageTags>bus;neobus;eventbus;event;</PackageTags>
     <PackageReadmeFile></PackageReadmeFile>
   </PropertyGroup>
