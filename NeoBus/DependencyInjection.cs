@@ -10,9 +10,9 @@ namespace NeoBus
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddNeoBus(this IServiceCollection services)
+        public static IServiceCollection AddNeoBus(this IServiceCollection services, Assembly assembly)
         {
-            services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddMediatR(assembly);
 
             services.AddSingleton(x => new SemaphoreSlim(1));
 
