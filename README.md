@@ -27,9 +27,10 @@ If you like or are using this project to learn or using NeoBus package, please g
 >  services.AddNeoBus(Assembly.GetExecutingAssembly());
 ```
 
-### Register Distributed Events
+## Register Distributed Events
 
-#### Distributed Events(Event On Kafka) :
+### Distributed Events(Event On Kafka) :
+
 ```ruby
 > services.AddHostedService<KafkaEventSubscriberService<ProductAddedEventOnKafka, ProductAddedEventOnKafkaHandler>>();
 
@@ -55,13 +56,15 @@ If you like or are using this project to learn or using NeoBus package, please g
 #### InMemory Events :
 ```ruby
 > services.AddScoped<INotificationHandler<ProductAddedEvent>, ProductAddedEventHandler>();
+```
 
 ### The source of a project that used NeoBus is also included.
 
 > [Sample For Use NeoBus](https://github.com/omid-ahmadpour/NeoBus/tree/main/Sample/SampleForUseNeoBus)
 
-## Kafka Docker Compose
-  ### for running Kafka, follow the following instruction
+
+### Kafka Docker Compose
+  #### for running Kafka, follow the following instruction
   
   ```ruby
   1. Install Docker on your OS(operating system)
@@ -71,6 +74,7 @@ If you like or are using this project to learn or using NeoBus package, please g
   5. Run docker-compose -f docker-compose-kafka.yml up
   6. Now Kafka is ready on Docker
    ```
+   
    
    ## Read More
 1. https://medium.com/@omid-ahmadpour/eventbus-application-and-introduction-of-neobus-package-c22029d07f4
