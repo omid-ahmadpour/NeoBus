@@ -19,7 +19,7 @@ namespace SampleForUseNeoBus.ApplicationService.EventHandlers
         {
             //Do Your Function
 
-            _logger.LogInformation("Event Received From Event Handler: " + notification);
+            _logger.LogInformation("Event Received From ProductAddedEventOnKafka: " + notification);
             return Task.CompletedTask;
         }
     }
