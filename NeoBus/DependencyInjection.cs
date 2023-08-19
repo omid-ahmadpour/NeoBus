@@ -1,5 +1,4 @@
-﻿using MediatR;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using NeoBus.Kafka;
 using NeoBus.MessageBus;
 using NeoBus.MessageBus.Abstractions;
@@ -12,7 +11,7 @@ namespace NeoBus
     {
         public static IServiceCollection AddNeoBus(this IServiceCollection services, Assembly assembly)
         {
-            services.AddMediatR(assembly);
+            services.AddMediatR(c => c.RegisterServicesFromAssembly(assembly));
 
             services.AddSingleton(x => new SemaphoreSlim(1));
 

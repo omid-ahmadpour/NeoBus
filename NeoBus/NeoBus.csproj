@@ -1,34 +1,34 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>1.2.0</Version>
+    <Version>1.3.0</Version>
     <Authors>Omid Ahmadpour</Authors>
     <Description>A Bus for sending command, query and event using CQRS in .NET</Description>
     <PackageProjectUrl>https://github.com/omid-ahmadpour/NeoBus</PackageProjectUrl>
-    <PackageIcon>NeoBus.png</PackageIcon>
+    <!--<PackageIcon>NeoBus.png</PackageIcon>-->
     <RepositoryUrl>https://github.com/omid-ahmadpour/NeoBus</RepositoryUrl>
     <PackageReleaseNotes>registering cammands and queries automatically.</PackageReleaseNotes>
     <PackageTags>bus;neobus;eventbus;event;</PackageTags>
     <PackageReadmeFile></PackageReadmeFile>
+    <PackageIcon>NeoBus.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="C:\Users\Omid\Desktop\NeoBus.png">
+    <None Include="..\Icons\NeoBus.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Confluent.Kafka" Version="1.8.2" />
-    <PackageReference Include="MediatR" Version="10.0.1" />
-    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
+    <PackageReference Include="Confluent.Kafka" Version="2.2.0" />
+    <PackageReference Include="MediatR" Version="12.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="7.0.4" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.1" />
     <PackageReference Include="Utf8Json" Version="1.3.7" />
   </ItemGroup>
 
