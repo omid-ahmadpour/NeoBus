@@ -71,7 +71,7 @@ If you like or are using this project to learn or using NeoBus package, please g
   2. Download and put the docker-compose-kafka.yml file in a path(There is inside the project solution)
   3. Open your Terminal as administrator
   4. Go to the docker-compose-kafka.yml file path
-  5. Run docker-compose -f docker-compose-kafka.yml up
+  5. Run "docker-compose -f docker-compose-kafka.yml up"
   6. Now Kafka is ready on Docker
    ```
    
