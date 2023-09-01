@@ -1,81 +1,83 @@
 # NeoBus
-A Bus for sending command, query and event using CQRS in .NET
+NeoBus is a powerful library that enables you to send commands, queries, and events using the CQRS pattern in .NET. It simplifies the implementation of distributed systems and event-driven architectures by seamlessly integrating with Kafka. If you find NeoBus helpful, please consider giving it a star ⭐ to show your support.
 
-## Give a Star! ⭐
-If you like or are using this project to learn or using NeoBus package, please give it a star. Thanks!
+## Installation
+You can easily install NeoBus via NuGet Package Manager:
 
-## Installing NeoBus
-
-```ruby
+```shell
 > Install-Package NeoBus
 ```
 
-## AppSettings Config
-## Put the following configuration in appsettings.json and add your kafka address
-```
+## Configuration
+To configure NeoBus, add the following settings to your `appsettings.json` file and specify your Kafka server address:
+
+```json
 "NeoBus": {
     "Kafka": {
-      "Servers": [ "localhost:9092" ]
+        "Servers": ["localhost:9092"]
     }
-  }}
-  ```
-  
-## Register NeoBus
-### in Startup -> ConfigureServices
-
-```ruby
->  services.AddNeoBus(Assembly.GetExecutingAssembly());
+}
 ```
 
-## Register Distributed Events
+## Registration
+Incorporate NeoBus into your project by registering it in the `Startup.cs` file within the `ConfigureServices` method:
 
-### Distributed Events(Event On Kafka) :
-
-```ruby
-> services.AddHostedService<KafkaEventSubscriberService<ProductAddedEventOnKafka, ProductAddedEventOnKafkaHandler>>();
-
- services.AddSingleton<ProductAddedEventOnKafkaHandler>();
+```csharp
+services.AddNeoBus(Assembly.GetExecutingAssembly());
 ```
 
+### Distributed Events (Kafka)
+For distributed events using Kafka, register the necessary services as follows:
 
-### for versions lower than 1.2.0 use following code to register and need to register commands and queries manually
-
-```ruby
-> services.AddNeoBus();
+```csharp
+services.AddHostedService<KafkaEventSubscriberService<ProductAddedEventOnKafka, ProductAddedEventOnKafkaHandler>>();
+services.AddSingleton<ProductAddedEventOnKafkaHandler>();
 ```
 
-### Register Command and Query and Event
+If you are using a version lower than 1.2.0, use the following code to register and manually register commands and queries:
 
-#### Command And Query :
-```ruby
-> services.AddScoped<IRequestHandler<ProductAddCommand, CommandResult>, ProductAddCommandHandler>();
-
-> services.AddScoped<IRequestHandler<GetProductQuery, CommandResult>, GetProductQueryHandler>();
+```csharp
+services.AddNeoBus();
 ```
 
-#### InMemory Events :
-```ruby
-> services.AddScoped<INotificationHandler<ProductAddedEvent>, ProductAddedEventHandler>();
+### Registering Commands, Queries, and In-Memory Events
+To register commands and queries, follow these steps:
+
+#### Command and Query Handlers:
+```csharp
+services.AddScoped<IRequestHandler<ProductAddCommand, CommandResult>, ProductAddCommandHandler>();
+services.AddScoped<IRequestHandler<GetProductQuery, CommandResult>, GetProductQueryHandler>();
 ```
 
-### The source of a project that used NeoBus is also included.
+#### In-Memory Event Handlers:
+```csharp
+services.AddScoped<INotificationHandler<ProductAddedEvent>, ProductAddedEventHandler>();
+```
 
-> [Sample For Use NeoBus](https://github.com/omid-ahmadpour/NeoBus/tree/main/Sample/SampleForUseNeoBus)
+## Sample Project
+Explore a sample project that demonstrates how to use NeoBus:
 
+[Sample For Use NeoBus](https://github.com/omid-ahmadpour/NeoBus/tree/main/Sample/SampleForUseNeoBus)
 
-### Kafka Docker Compose
-  #### for running Kafka, follow the following instruction
-  
-  ```ruby
-  1. Install Docker on your local machine
-  2. Download and put the docker-compose-kafka.yml file in a path(There is inside the project solution)
-  3. Open your Terminal as administrator
-  4. Go to the docker-compose-kafka.yml file path
-  5. Run "docker-compose -f docker-compose-kafka.yml up"
-  6. Now Kafka is ready on Docker
-   ```
-   
-   
-   ## Read More
-1. https://medium.com/@omid-ahmadpour/eventbus-application-and-introduction-of-neobus-package-c22029d07f4
-2. https://virgool.io/@ahmadpooromid/%DA%A9%D8%A7%D8%B1%D8%A8%D8%B1%D8%AF-eventbus-%D9%88-%D9%85%D8%B9%D8%B1%D9%81%DB%8C-%D9%BE%DA%A9%DB%8C%D8%AC-neobus-rveoqqgefbmu
+## Setting Up Kafka with Docker Compose
+To run Kafka locally, follow these instructions:
+
+1. Install Docker on your local machine.
+2. Download the `docker-compose-kafka.yml` file from within the project solution.
+3. Open your Terminal as an administrator.
+4. Navigate to the directory containing the `docker-compose-kafka.yml` file.
+5. Run the following command:
+
+```shell
+docker-compose -f docker-compose-kafka.yml up
+```
+
+Now Kafka is up and running in a Docker container.
+
+## Learn More
+For more information about NeoBus and its applications, consider reading the following articles:
+
+1. [EventBus Application and Introduction of NeoBus Package](https://medium.com/@omid-ahmadpour/eventbus-application-and-introduction-of-neobus-package-c22029d07f4)
+2. [کاربرد EventBus و معرفی پکیج NeoBus (Persian)](https://virgool.io/@ahmadpooromid/%DA%A9%D8%A7%D8%B1%D8%A8%D8%AF-eventbus-%D9%88-%D9%85%D8%B9%D8%B1%D9%81%DB%8C-%D9%BE%DA%A9%DB%8C%D8%AC-neobus-rveoqqgefbmu)
+
+Feel free to explore these resources to enhance your understanding of NeoBus and its capabilities.
