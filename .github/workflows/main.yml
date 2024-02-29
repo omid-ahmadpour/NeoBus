@@ -17,16 +17,16 @@ jobs:
         dotnet-version: 7.0.x
 
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore ./NeoBus/NeoBus/NeoBus.csproj
 
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build ./NeoBus/NeoBus/NeoBus.csproj --configuration Release --no-restore
 
     - name: Test
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet test ./NeoBus/NeoBus/NeoBus.csproj --no-restore --verbosity normal
 
     - name: Pack
-      run: dotnet pack --no-build --configuration Release --output nupkgs
+      run: dotnet pack ./NeoBus/NeoBus/NeoBus.csproj --no-build --configuration Release --output nupkgs
 
     - name: Push
       run: dotnet nuget push ./nupkgs/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
