@@ -7,7 +7,6 @@
     <Authors>Omid Ahmadpour</Authors>
     <Description>A Bus for sending command, query and event using CQRS in .NET</Description>
     <PackageProjectUrl>https://github.com/omid-ahmadpour/NeoBus</PackageProjectUrl>
-    <!--<PackageIcon>NeoBus.png</PackageIcon>-->
     <RepositoryUrl>https://github.com/omid-ahmadpour/NeoBus</RepositoryUrl>
     <PackageReleaseNotes>registering cammands and queries automatically.</PackageReleaseNotes>
     <PackageTags>bus;neobus;eventbus;event;</PackageTags>
