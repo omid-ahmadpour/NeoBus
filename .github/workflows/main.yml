@@ -50,10 +50,10 @@ jobs:
         shell: bash
 
       - name: Publish to NuGet.org
-        run: dotnet nuget push ${{ github.workspace }}/${{ needs.build.outputs.stepsOutput.NUPKG_PATH }} --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+        run: dotnet nuget push ${{ env.NUPKG_PATH }} --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
 
       - name: Publish to GitHub Packages
         run: |
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.PROFILE_TOKEN }}" >> $HOME/.npmrc
           dotnet nuget add source "https://nuget.pkg.github.com/omid-ahmadpour/index.json" --name github --username ${{ github.actor }} --password ${{ secrets.PROFILE_TOKEN }} --store-password-in-clear-text
-          dotnet nuget push ${{ github.workspace }}/${{ needs.build.outputs.stepsOutput.NUPKG_PATH }} --source github --no-service-endpoint
+          dotnet nuget push ${{ env.NUPKG_PATH }} --source github --no-service-endpoint
