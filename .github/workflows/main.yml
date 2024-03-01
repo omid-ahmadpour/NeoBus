@@ -11,6 +11,7 @@ jobs:
       stepsOutput: ${{ steps.publish.outputs }}
 
     steps:
+    
       - name: Checkout
         uses: actions/checkout@v2
 
@@ -36,11 +37,24 @@ jobs:
           dotnet pack ./NeoBus/NeoBus.csproj --no-build --configuration Release --output ${{ github.workspace }}/nupkgs
           ls -la ${{ github.workspace }}/nupkgs
 
+      - name: Upload nupkgs
+        uses: actions/upload-artifact@v2
+        with:
+          name: nupkgs
+          path: ${{ github.workspace }}/nupkgs
+
   publish:
     needs: build
     runs-on: ubuntu-latest
 
     steps:
+
+      - name: Download nupkgs
+        uses: actions/download-artifact@v2
+        with:
+          name: nupkgs
+          path: ${{ github.workspace }}/nupkgs
+    
       - name: Checkout
         uses: actions/checkout@v2
 
