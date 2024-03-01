@@ -14,7 +14,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 7.0.x
+        dotnet-version: 8.0.x
 
     - name: Restore dependencies
       run: dotnet restore ./NeoBus/NeoBus.csproj
@@ -30,3 +30,9 @@ jobs:
 
     - name: Push
       run: dotnet nuget push ./nupkgs/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+
+    - name: Publish to GitHub Packages
+      run: |
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.ProfileToken }}" >> $HOME/.npmrc
+          dotnet nuget add source "https://nuget.pkg.github.com/omid-ahmadpour/index.json" --name github --username ${{ github.actor }} --password ${{ secrets.ProfileToken }} --store-password-in-clear-text
+          dotnet nuget push ./nupkgs/*.nupkg --source github --no-service-endpoint
