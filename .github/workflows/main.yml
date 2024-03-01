@@ -7,6 +7,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    outputs:
+      stepsOutput: ${{ steps.publish.outputs }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -41,14 +44,16 @@ jobs:
         with:
           dotnet-version: 8.0.x
 
-      - name: Create nupkgs directory
-        run: mkdir -p nupkgs
+      - name: Set output variable
+        id: set-output
+        run: echo "NUPKG_PATH=$(find ${{ github.workspace }}/nupkgs -name *.nupkg)" >> $GITHUB_ENV
+        shell: bash
 
-      - name: Publish to NuGet Packages
-        run: dotnet nuget push ./nupkgs/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+      - name: Publish to NuGet.org
+        run: dotnet nuget push ${{ needs.build.outputs.stepsOutput.NUPKG_PATH }} --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
 
       - name: Publish to GitHub Packages
         run: |
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.ProfileToken }}" >> $HOME/.npmrc
-          dotnet nuget add source "https://nuget.pkg.github.com/omid-ahmadpour/index.json" --name github --username ${{ github.actor }} --password ${{ secrets.ProfileToken }} --store-password-in-clear-text
-          dotnet nuget push ./nupkgs/*.nupkg --source github --no-service-endpoint
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.PROFILE_TOKEN }}" >> $HOME/.npmrc
+          dotnet nuget add source "https://nuget.pkg.github.com/OWNER/index.json" --name github --username ${{ github.actor }} --password ${{ secrets.PROFILE_TOKEN }} --store-password-in-clear-text
+          dotnet nuget push ${{ needs.build.outputs.stepsOutput.NUPKG_PATH }} --source github --no-service-endpoint
