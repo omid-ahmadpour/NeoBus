@@ -55,5 +55,5 @@ jobs:
       - name: Publish to GitHub Packages
         run: |
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.PROFILE_TOKEN }}" >> $HOME/.npmrc
-          dotnet nuget add source "https://nuget.pkg.github.com/OWNER/index.json" --name github --username ${{ github.actor }} --password ${{ secrets.PROFILE_TOKEN }} --store-password-in-clear-text
+          dotnet nuget add source "https://nuget.pkg.github.com/omid-ahmadpour/index.json" --name github --username ${{ github.actor }} --password ${{ secrets.PROFILE_TOKEN }} --store-password-in-clear-text
           dotnet nuget push ${{ needs.build.outputs.stepsOutput.NUPKG_PATH }} --source github --no-service-endpoint
