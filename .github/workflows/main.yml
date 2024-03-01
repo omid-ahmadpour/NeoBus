@@ -28,6 +28,9 @@ jobs:
       - name: Test
         run: dotnet test ./NeoBus/NeoBus.csproj --no-restore --verbosity normal
 
+      - name: Create nupkgs directory
+        run: mkdir -p nupkgs
+
       - name: Pack
         run: dotnet pack ./NeoBus/NeoBus.csproj --no-build --configuration Release --output nupkgs
 
@@ -47,9 +50,14 @@ jobs:
       - name: Set output variable
         id: set-output
         run: |
-          find ${{ github.workspace }}/nupkgs -name *.nupkg | head -n 1 > nupkg_path.txt
-          echo "NUPKG_PATH=$(cat nupkg_path.txt)" >> $GITHUB_ENV
-          cat nupkg_path.txt
+          find ${{ github.workspace }}/nupkgs -name *.nupkg | head -n 1 > nupkg_path.txt || true
+          if [ -s nupkg_path.txt ]; then
+            echo "NUPKG_PATH=$(cat nupkg_path.txt)" >> $GITHUB_ENV
+            cat nupkg_path.txt
+          else
+            echo "Error: No .nupkg files found in the nupkgs directory."
+            exit 1
+          fi
         shell: bash
 
       - name: Publish to NuGet.org
