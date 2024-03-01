@@ -46,7 +46,7 @@ jobs:
 
       - name: Set output variable
         id: set-output
-        run: echo "NUPKG_PATH=$(find ${{ github.workspace }}/nupkgs -name *.nupkg)" >> $GITHUB_ENV
+        run: echo "NUPKG_PATH=$(find ${{ github.workspace }}/nupkgs -name *.nupkg -print -quit)" >> $GITHUB_ENV
         shell: bash
 
       - name: Publish to NuGet.org
