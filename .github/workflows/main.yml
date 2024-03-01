@@ -34,9 +34,6 @@ jobs:
       - name: Pack
         run: dotnet pack ./NeoBus/NeoBus.csproj --no-build --configuration Release --output nupkgs
 
-      - name: List nupkgs directory
-        run: ls -R nupkgs
-
   publish:
     needs: build
     runs-on: ubuntu-latest
