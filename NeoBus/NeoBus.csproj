@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<Version>1.4.0</Version>
+		<Version>1.4.1</Version>
 		<Authors>Omid Ahmadpour</Authors>
 		<Description>A Bus for sending command, query and event using CQRS in .NET</Description>
 		<PackageProjectUrl>https://github.com/omid-ahmadpour/NeoBus</PackageProjectUrl>
