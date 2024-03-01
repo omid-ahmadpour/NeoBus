@@ -25,6 +25,9 @@ jobs:
       - name: Test
         run: dotnet test ./NeoBus/NeoBus.csproj --no-restore --verbosity normal
 
+      - name: Create nupkgs directory
+        run: mkdir -p nupkgs
+
       - name: Pack
         run: dotnet pack ./NeoBus/NeoBus.csproj --no-build --configuration Release --output nupkgs
 
