@@ -32,7 +32,9 @@ jobs:
         run: mkdir -p nupkgs
 
       - name: Pack
-        run: dotnet pack ./NeoBus/NeoBus.csproj --no-build --configuration Release --output ${{ github.workspace }}/nupkgs
+        run: |
+          dotnet pack ./NeoBus/NeoBus.csproj --no-build --configuration Release --output ${{ github.workspace }}/nupkgs
+          ls -la ${{ github.workspace }}/nupkgs
 
   publish:
     needs: build
