@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build-test-pack-publish :
 
     runs-on: ubuntu-latest
 
@@ -31,5 +31,5 @@ jobs:
     - name: Publish to GitHub Packages
       run: dotnet nuget push ./nupkgs/*.nupkg --api-key ${{ secrets.PROFILE_TOKEN }} --source https://nuget.pkg.github.com/omid-ahmadpour/index.json
 
-    - name: Push
+    - name: Publish to Nuget Packages
       run: dotnet nuget push ./nupkgs/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
