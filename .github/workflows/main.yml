@@ -5,86 +5,31 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
 
-    outputs:
-      stepsOutput: ${{ steps.publish.outputs }}
-
-    steps:
-    
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: 8.0.x
-
-      - name: Restore dependencies
-        run: dotnet restore ./NeoBus/NeoBus.csproj
-
-      - name: Build
-        run: dotnet build ./NeoBus/NeoBus.csproj --configuration Release --no-restore
-
-      - name: Test
-        run: dotnet test ./NeoBus/NeoBus.csproj --no-restore --verbosity normal
-
-      - name: Create nupkgs directory
-        run: mkdir -p nupkgs
-
-      - name: Pack
-        run: |
-          dotnet pack ./NeoBus/NeoBus.csproj --no-build --configuration Release --output ${{ github.workspace }}/nupkgs
-          ls -la ${{ github.workspace }}/nupkgs
-
-      - name: Upload nupkgs
-        uses: actions/upload-artifact@v2
-        with:
-          name: nupkgs
-          path: ${{ github.workspace }}/nupkgs
-
-  publish:
-    needs: build
     runs-on: ubuntu-latest
 
     steps:
+    - uses: actions/checkout@v2
 
-      - name: Download nupkgs
-        uses: actions/download-artifact@v2
-        with:
-          name: nupkgs
-          path: .
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 8.0.x
 
-    
-      - name: Checkout
-        uses: actions/checkout@v2
+    - name: Restore dependencies
+      run: dotnet restore ./NeoBus/NeoBus.csproj
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: 8.0.x
+    - name: Build
+      run: dotnet build ./NeoBus/NeoBus.csproj --configuration Release --no-restore
 
-      - name: Set output variable
-        id: set-output
-        run: |
-          find ${{ github.workspace }}/nupkgs/nupkgs -name *.nupkg | head -n 1 > nupkg_path.txt || true
-          if [ -s nupkg_path.txt ]; then
-            echo "NUPKG_PATH=$(cat nupkg_path.txt)" >> $GITHUB_ENV
-            cat nupkg_path.txt
-          else
-            echo "Error: No .nupkg files found in the nupkgs directory."
-            exit 1
-          fi
-        shell: bash
+    - name: Test
+      run: dotnet test ./NeoBus/NeoBus.csproj --no-restore --verbosity normal
 
-      - name: Publish to NuGet.org
-        run: |
-          echo "Publishing to NuGet.org with NUPKG_PATH: ${{ env.NUPKG_PATH }}"
-          dotnet nuget push ${{ env.NUPKG_PATH }} --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+    - name: Pack
+      run: dotnet pack ./NeoBus/NeoBus.csproj --no-build --configuration Release --output nupkgs
 
-      - name: Publish to GitHub Packages
-        run: |
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.PROFILE_TOKEN }}" >> $HOME/.npmrc
-          dotnet nuget add source "https://nuget.pkg.github.com/omid-ahmadpour/index.json" --name github --username ${{ github.actor }} --password ${{ secrets.PROFILE_TOKEN }} --store-password-in-clear-text
-          echo "Publishing to GitHub Packages with NUPKG_PATH: ${{ env.NUPKG_PATH }}"
-          dotnet nuget push ${{ env.NUPKG_PATH }} --source github --no-service-endpoint
+    - name: Publish to GitHub Packages
+      run: dotnet nuget push ./nupkgs/*.nupkg --api-key ${{ secrets.PROFILE_TOKEN }} --source https://nuget.pkg.github.com/omid-ahmadpour/index.json
+
+    - name: Push
+      run: dotnet nuget push ./nupkgs/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
