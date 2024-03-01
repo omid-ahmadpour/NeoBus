@@ -67,7 +67,7 @@ jobs:
       - name: Set output variable
         id: set-output
         run: |
-          find ${{ github.workspace }}/nupkgs -name *.nupkg | head -n 1 > nupkg_path.txt || true
+          find ${{ github.workspace }}/nupkgs/nupkgs -name *.nupkg | head -n 1 > nupkg_path.txt || true
           if [ -s nupkg_path.txt ]; then
             echo "NUPKG_PATH=$(cat nupkg_path.txt)" >> $GITHUB_ENV
             cat nupkg_path.txt
