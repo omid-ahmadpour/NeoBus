@@ -29,10 +29,13 @@ jobs:
         run: dotnet test ./NeoBus/NeoBus.csproj --no-restore --verbosity normal
 
       - name: Create nupkgs directory
-        run: mkdir -p ${{ github.workspace }}/nupkgs
+        run: mkdir -p nupkgs
 
       - name: Pack
-        run: dotnet pack ./NeoBus/NeoBus.csproj --no-build --configuration Release --output ${{ github.workspace }}/nupkgs
+        run: dotnet pack ./NeoBus/NeoBus.csproj --no-build --configuration Release --output nupkgs
+
+      - name: List nupkgs directory
+        run: ls -R nupkgs
 
   publish:
     needs: build
