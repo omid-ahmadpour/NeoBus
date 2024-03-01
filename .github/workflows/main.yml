@@ -46,14 +46,20 @@ jobs:
 
       - name: Set output variable
         id: set-output
-        run: echo "NUPKG_PATH=$(find ${{ github.workspace }}/nupkgs -name *.nupkg | head -n 1)" >> $GITHUB_ENV
+        run: |
+          find ${{ github.workspace }}/nupkgs -name *.nupkg | head -n 1 > nupkg_path.txt
+          echo "NUPKG_PATH=$(cat nupkg_path.txt)" >> $GITHUB_ENV
+          cat nupkg_path.txt
         shell: bash
 
       - name: Publish to NuGet.org
-        run: dotnet nuget push ${{ env.NUPKG_PATH }} --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+        run: |
+          echo "Publishing to NuGet.org with NUPKG_PATH: ${{ env.NUPKG_PATH }}"
+          dotnet nuget push ${{ env.NUPKG_PATH }} --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
 
       - name: Publish to GitHub Packages
         run: |
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.PROFILE_TOKEN }}" >> $HOME/.npmrc
           dotnet nuget add source "https://nuget.pkg.github.com/omid-ahmadpour/index.json" --name github --username ${{ github.actor }} --password ${{ secrets.PROFILE_TOKEN }} --store-password-in-clear-text
+          echo "Publishing to GitHub Packages with NUPKG_PATH: ${{ env.NUPKG_PATH }}"
           dotnet nuget push ${{ env.NUPKG_PATH }} --source github --no-service-endpoint
