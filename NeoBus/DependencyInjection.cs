@@ -22,7 +22,5 @@ namespace NeoBus
             return services;
 
         }
-
-
     }
 }
