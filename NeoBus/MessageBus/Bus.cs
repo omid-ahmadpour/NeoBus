@@ -43,5 +43,6 @@ namespace NeoBus.MessageBus
                 await eventProducer.ProduceEvent(@event);
             }
         }
+
     }
 }
