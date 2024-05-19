@@ -20,6 +20,7 @@ namespace NeoBus
             services.AddScoped<IBus, Bus>();
 
             return services;
+
         }
     }
 }
